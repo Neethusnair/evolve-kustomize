@@ -9,7 +9,7 @@ on:
     types: [instance]
     
 env:
-  namePrefix: 
+  namePrefix: "${{ github.event.client_payload.namePrefix }}"
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -42,4 +42,5 @@ jobs:
     
       - name: Commit files
        run: |
-        echo 
+        echo $namePrefix
+        echo namePrefix
