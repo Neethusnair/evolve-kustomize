@@ -40,7 +40,7 @@ jobs:
     #     github_token: ${{ secrets.PERSONAL_TOKEN}}
     #     branch: main
     
-      - name: Commit files
+     - name: Commit files
        run: |
         echo $namePrefix
         echo namePrefix
