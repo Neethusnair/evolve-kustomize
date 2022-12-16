@@ -1,0 +1,26 @@
+name: receive and display value from previous workflow.
+
+# Triggers the workflow on api call
+on:
+#   workflow_dispatch
+  repository_dispatch:
+    types: [subdomain]
+    
+env:
+  variablefromworkflow: ${{ github.event.client_payload.data}} 
+
+
+jobs:
+  Job1:
+    name: display value send from previous workflow
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: display value
+      run: |
+        echo $variablefromworkflow
+        echo variablefromworkflow
+

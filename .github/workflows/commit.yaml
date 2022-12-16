@@ -21,26 +21,24 @@ jobs:
     steps:
      - name: Checkout
        uses: actions/checkout@v2
-    #    with:
-    #      persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-    #      fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-    #  - name: Create local changes
-    #    run: |
-    #     sed "s|namePrefix_name|$namePrefix|g; " $templateName1.yaml > $fileName1.yaml
-    #     sed "s|labelName|$labelName|g; s|domainName|$domainName|g; s|serviceName|$serviceName|g; s|databaseName|$databaseName|g;" $templateName.yaml > $fileName.yaml
-        
-    #  - name: Commit files
-    #    run: |
-    #     git config --local user.email "neethu.somasekharan@sreyo.com"
-    #     git config --local user.name "Neethusnair"
-    #     git commit -m "Add changes" -a
-    #  - name: Push changes
-    #    uses: ad-m/github-push-action@master
-    #    with:
-    #     github_token: ${{ secrets.PERSONAL_TOKEN}}
-    #     branch: main
-    
-     - name: Commit files
+
+      - name: Display value
        run: |
         echo $namePrefix
         echo namePrefix
+
+ Job2:
+    needs: Job1
+    name: Send call to newworkflow workflow
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+
+     - name: Repository Dispatch to subdomain workflow
+       uses: peter-evans/repository-dispatch@v1
+       with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          event-type: subdomain
+          client-payload: '{"data": "hello"}'  
