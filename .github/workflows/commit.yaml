@@ -22,12 +22,12 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v2
 
-      - name: Display value
+     - name: Display value
        run: |
         echo $namePrefix
         echo namePrefix
 
- Job2:
+  Job2:
     needs: Job1
     name: Send call to newworkflow workflow
     runs-on: ubuntu-latest
